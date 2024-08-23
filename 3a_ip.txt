@@ -1,0 +1,9 @@
+void main() {
+	int a; //integer
+	char b; //character
+	/*
+	Multiline
+	comment*/
+	fun(); //function call
+	//last comment
+}

@@ -1,0 +1,4 @@
+int a, b, c;
+char d;
+
+a = 2*b + c;
