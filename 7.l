@@ -13,6 +13,8 @@
 "void" return VOID;
 "printf" return PRINTF;
 "return" return RETURN;
+"//".*[\n] {/*ignore single line comments*/};
+"/*"[.a-zA-Z0-9\t\n ]*"*/" {/*ignore multi line comments*/};
 [_a-zA-Z]+[_a-zA-Z0-9]* return IDENTIFIER;
 "," return ',';
 "(" return '(';
@@ -22,8 +24,6 @@
 "=" return '=';
 [0-9]+ return NUM;
 ";" return ';';
-"//".*[\n] {/*ignore single line comments*/};
-"/*".*"*/" {/*ignore multi line comments*/};
 [+\-*/] return BASIC_OP;
 \"(\\.|[^\\"])*\" return STRING_LITERAL;
 . return yytext[0];

@@ -7,8 +7,11 @@ int f(int x, int y, int z) {
 
 int main (int x, int y) {
 	int a,b;
+	//singleline comment
 	a = 3;
 	b = 4;
+	/*multi line
+	comment*/
 	b = a + b;
 	printf("b = %d, a = %d",b ,a);
 	return a + b;
