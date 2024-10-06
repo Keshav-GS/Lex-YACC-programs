@@ -1,0 +1,15 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int f(int x, int y, int z) {
+	return x + y + z;
+}
+
+int main (int x, int y) {
+	int a,b;
+	a = 3;
+	b = 4;
+	b = a + b;
+	printf("b = %d, a = %d",b ,a);
+	return a + b;
+}
