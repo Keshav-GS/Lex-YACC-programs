@@ -14,7 +14,7 @@
 "printf" return PRINTF;
 "return" return RETURN;
 "//".*[\n] {/*ignore single line comments*/};
-"/*"[.a-zA-Z0-9\t\n ]*"*/" {/*ignore multi line comments*/};
+"/*"(.|\n)*"*/" {/*ignore multi line comments*/};
 [_a-zA-Z]+[_a-zA-Z0-9]* return IDENTIFIER;
 "," return ',';
 "(" return '(';
