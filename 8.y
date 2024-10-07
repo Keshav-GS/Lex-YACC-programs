@@ -22,14 +22,14 @@ void yyerror(const char* s) {
 %token <id> ID
 %token <num> NUM
 %token <str> STRING
-%token INT MAIN PRINTF ADD LPAREN RPAREN SEMI COMMA LBRACE RBRACE ASSIGN
+%token INT MAIN PRINTF 
 
 %start program
 
 %%
 
 program:
-    INT MAIN LPAREN RPAREN LBRACE stmt_list RBRACE
+    INT MAIN '(' ')' '{' stmt_list '}'
     {
         printf(".data\n");
         printf("    .LC0: .string \"Sum %%d\"\n");  
@@ -45,15 +45,15 @@ stmt_list:
     ;
 
 stmt:
-    INT ID ASSIGN NUM SEMI {
+    INT ID '=' NUM ';' {
         printf("   movl $%d, %s\n", $4, $2); 
     }
-    | ID ASSIGN ID ADD ID SEMI {
+    | ID '=' ID '+' ID ';' {
         printf("    movl %s, %%eax\n", $3);
         printf("    addl %s, %%eax\n", $5);
         printf("    movl %%eax, %s\n", $1);
     }
-    | PRINTF LPAREN STRING COMMA ID RPAREN SEMI {
+    | PRINTF '(' STRING ',' ID ')' ';' {
         printf("    movl %s, %%edi\n", $5);  // Load argument into %edi
         printf("    movl $.LC0, %%rsi\n");   // Address of format string into %rsi
         printf("    call printf\n");         // Call printf function

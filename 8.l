@@ -4,32 +4,20 @@
 #include <string.h>
 %}
 
-DIGIT [0-9]
-ID [a-zA-Z][a-zA-Z0-9]*
-WS [ \t\n]
-STRING \"[^"]*\" 
 %%
 
 "int"         { return INT; }
 "main"        { return MAIN; }
 "printf"      { return PRINTF; }
-{STRING}      { yylval.str = strdup(yytext); return STRING; }
-{ID}          { yylval.id = strdup(yytext); return ID; }
-{DIGIT}+      { yylval.num = atoi(yytext); return NUM; }
-"+"           { return ADD; }
-"="           { return ASSIGN; }
-"("           { return LPAREN; }
-")"           { return RPAREN; }
-";"           { return SEMI; }
-","           { return COMMA; }
-"{"           { return LBRACE; }
-"}"           { return RBRACE; }
-{WS}          ; /* ignore whitespace */
+\"[^"]*\"       { yylval.str = strdup(yytext); return STRING; }
+[a-zA-Z][a-zA-Z0-9]*          { yylval.id = strdup(yytext); return ID; }
+[0-9]+     { yylval.num = atoi(yytext); return NUM; }
+[ \t]          ; /* ignore whitespace */
+. return yytext[0];
+\n return 0;
 
 %%
 
 int yywrap() {
     return 1;
 }
-
-
